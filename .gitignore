@@ -1,3 +1,10 @@
-# UX audit (local only — do not publish)
-.docs/
-screenshots/
+.DS_Store
+node_modules/
+
+# UX audit run outputs (generated locally — do not commit)
+.docs/audit-data.json
+.docs/ux-audit-results.md
+.docs/enhancement-log.md
+.docs/feature-completeness.md
+.docs/ux-audit-report.html
+screenshots/**/*.png

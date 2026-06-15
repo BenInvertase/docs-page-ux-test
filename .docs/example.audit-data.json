@@ -1,0 +1,16 @@
+{
+  "_comment": "Example shape only. npm run audit writes the real audit-data.json (gitignored).",
+  "auditedAt": "2026-01-01T00:00:00.000Z",
+  "rubricVersion": "1.2",
+  "platforms": {
+    "mintlify": "https://agentskills.io",
+    "docspage": "https://example.docs.page/your-org/your-repo"
+  },
+  "mobileNav": {
+    "mintlify": { "opens": true, "links": ["…"] },
+    "docspage": { "opens": true, "links": ["…"] }
+  },
+  "discoverability": {},
+  "featureCompleteness": {},
+  "chromeChecklist": {}
+}
