@@ -26,40 +26,40 @@
         {
           "title": "Client Showcase",
           "href": "/clients"
+        }
+      ]
+    },
+    {
+      "group": "For skill creators",
+      "pages": [
+        {
+          "title": "Quickstart",
+          "href": "/skill-creation/quickstart"
         },
         {
-          "group": "For skill creators",
-          "pages": [
-            {
-              "title": "Quickstart",
-              "href": "/skill-creation/quickstart"
-            },
-            {
-              "title": "Best practices",
-              "href": "/skill-creation/best-practices"
-            },
-            {
-              "title": "Optimizing descriptions",
-              "href": "/skill-creation/optimizing-descriptions"
-            },
-            {
-              "title": "Evaluating skills",
-              "href": "/skill-creation/evaluating-skills"
-            },
-            {
-              "title": "Using scripts",
-              "href": "/skill-creation/using-scripts"
-            }
-          ]
+          "title": "Best practices",
+          "href": "/skill-creation/best-practices"
         },
         {
-          "group": "For client implementors",
-          "pages": [
-            {
-              "title": "Adding skills support",
-              "href": "/client-implementation/adding-skills-support"
-            }
-          ]
+          "title": "Optimizing descriptions",
+          "href": "/skill-creation/optimizing-descriptions"
+        },
+        {
+          "title": "Evaluating skills",
+          "href": "/skill-creation/evaluating-skills"
+        },
+        {
+          "title": "Using scripts",
+          "href": "/skill-creation/using-scripts"
+        }
+      ]
+    },
+    {
+      "group": "For client implementors",
+      "pages": [
+        {
+          "title": "Adding skills support",
+          "href": "/client-implementation/adding-skills-support"
         }
       ]
     }
