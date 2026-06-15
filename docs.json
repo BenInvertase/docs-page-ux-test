@@ -2,16 +2,64 @@
   "$schema": "https://docs.page/schema.json",
   "name": "Agent Skills",
   "description": "A standardized way to give AI agents new capabilities and expertise.",
+  "favicon": "/favicon.svg",
   "theme": {
-    "preset": "mint"
+    "preset": "mint",
+    "primary": "#7f7f7f",
+    "primaryLight": "#bfbfbf",
+    "primaryDark": "#404040"
+  },
+  "social": {
+    "github": "https://github.com/agentskills/agentskills"
   },
   "sidebar": [
     {
-      "group": "Documentation",
       "pages": [
         {
           "title": "Overview",
           "href": "/"
+        },
+        {
+          "title": "Specification",
+          "href": "/specification"
+        },
+        {
+          "title": "Client Showcase",
+          "href": "/clients"
+        },
+        {
+          "group": "For skill creators",
+          "pages": [
+            {
+              "title": "Quickstart",
+              "href": "/skill-creation/quickstart"
+            },
+            {
+              "title": "Best practices",
+              "href": "/skill-creation/best-practices"
+            },
+            {
+              "title": "Optimizing descriptions",
+              "href": "/skill-creation/optimizing-descriptions"
+            },
+            {
+              "title": "Evaluating skills",
+              "href": "/skill-creation/evaluating-skills"
+            },
+            {
+              "title": "Using scripts",
+              "href": "/skill-creation/using-scripts"
+            }
+          ]
+        },
+        {
+          "group": "For client implementors",
+          "pages": [
+            {
+              "title": "Adding skills support",
+              "href": "/client-implementation/adding-skills-support"
+            }
+          ]
         }
       ]
     }
