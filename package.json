@@ -7,9 +7,12 @@
     "audit": "node scripts/run-full-audit.mjs",
     "scorecards": "node scripts/generate-scorecards.mjs",
     "report": "node scripts/build-audit-report.mjs",
-    "audit:full": "npm run audit && npm run scorecards && npm run report"
+    "audit:full": "npm run audit && npm run scorecards && npm run report",
+    "test": "playwright test",
+    "test:regression": "playwright test tests/regression"
   },
   "devDependencies": {
+    "@playwright/test": "1.52.0",
     "playwright": "1.52.0"
   }
 }

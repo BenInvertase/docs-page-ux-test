@@ -37,7 +37,7 @@ const scores = {
   N4: {
     score: mobile.docspage?.opens && docMobileLinks >= 8 ? 2 : docMobileLinks >= 4 ? 1 : 0,
     summary: `mobileNav.opens; ${docMobileLinks} links vs Mintlify ${mintMobileLinks}`,
-    notes: docMobileLinks < 8 ? 'Drawer opens but incomplete tree' : '',
+    notes: docMobileLinks < 8 ? 'Drawer opens but incomplete tree' : 'Full sidebar tree in mobile drawer',
   },
   N9: {
     score: chrome.docspage?.tablet?.P2?.sidebar === 'drawer' ? 2 : 1,
@@ -56,7 +56,11 @@ const scores = {
   L4: { score: 1, summary: 'Breakpoint divergence at tablet' },
   L5: {
     score: chrome.docspage?.mobile?.P2?.outline === 'hidden' ? 2 : 1,
-    summary: `Mobile P2 outline \`${chrome.docspage?.mobile?.P2?.outline}\` + partial nav`,
+    summary: `Mobile P2 outline \`${chrome.docspage?.mobile?.P2?.outline ?? '—'}\` (Mintlify \`${chrome.mintlify?.mobile?.P2?.outline ?? '—'}\`)`,
+    notes:
+      chrome.docspage?.mobile?.P2?.outline === 'hidden'
+        ? 'No visible TOC rail on mobile — parity'
+        : 'Visible TOC competes with drawer-only sidebar',
   },
   L6: { score: 2, summary: 'Consistent chrome P1 vs P6 per viewport' },
   R1: { score: docMainW >= mintMainW * 0.8 ? 2 : 1, summary: `CPL ~${docP2.typography?.charsPerLine ?? '—'}; mainWidth ${docMainW}px` },
@@ -96,7 +100,13 @@ const scores = {
   O2: { score: 2, summary: 'TOC depth h2–h4' },
   O3: {
     score: (docP2.headingAnchors ?? 0) > 0 ? 2 : 1,
-    summary: `headingAnchors: ${docP2.headingAnchors ?? 0} on P2`,
+    summary: `heading permalinks: ${docP2.headingAnchors ?? 0}/${docP2.headingAnchorStats?.totalHeadings ?? '—'} (${docP2.headingAnchorStats?.style ?? 'none'})`,
+    notes:
+      docP2.headingAnchorStats?.style === 'adjacent'
+        ? 'Adjacent hover permalink buttons — Mintlify uses inline heading links (optional UI polish)'
+        : docP2.headingAnchors > 0
+          ? 'Heading permalinks present'
+          : '',
   },
   O4: { score: 2, summary: 'Title + h1 match' },
   O5: { score: dp.P1?.banner ? 2 : 1, summary: `banner: ${!!dp.P1?.banner}` },
@@ -169,8 +179,15 @@ const scores = {
   G5: { score: docP2.copyPage ? 2 : 1, summary: 'Copy page action on P2' },
 };
 
-// Fix O7 forward ref
-scores.O7 = { score: scores.L5.score, summary: 'See L5 — same mobile TOC/nav issue', notes: 'Dedup in log' };
+// O7 is scored once under L5 (mobile TOC vs drawer sidebar tradeoff).
+scores.O7 = {
+  score: scores.L5.score,
+  summary:
+    scores.L5.score >= 2
+      ? 'Mobile TOC hidden — see L5 (parity)'
+      : 'Visible mobile TOC with drawer sidebar — see L5',
+  notes: 'Dedup in log',
+};
 
 const categories = [
   { name: 'Navigation and wayfinding (+ L1–L6)', weight: 18, ids: ['N1', 'N2', 'N3', 'N4', 'N9', 'N5', 'N6', 'N7', 'N8', 'L1', 'L2', 'L3', 'L4', 'L5', 'L6'] },
@@ -262,8 +279,8 @@ const resultsMd = [
 const ENHANCEMENTS = [
   { pri: 'P1', id: 'N4', title: 'Mobile nav drawer — incomplete doc tree', also: 'F5', verification: `\`mobileNav.links.length: ${docMobileLinks}\` (Mintlify: ${mintMobileLinks})`, observed: 'Drawer opens but omits nested pages.', fix: 'Platform — full sidebar tree in mobile drawer.', effort: 'S' },
   { pri: 'P1', id: 'N9', title: 'Tablet layout keeps persistent sidebar', also: 'L2', verification: `Chrome tablet P2: sidebar \`${chrome.docspage?.tablet?.P2?.sidebar}\`, mainWidth ${docTabletMain}px vs ${mintTabletMain}px`, fix: 'Collapse sidebar to drawer ~1024px.', effort: 'M' },
-  { pri: 'P1', id: 'L5', title: 'Mobile TOC without full sidebar access', also: 'O7', verification: `Mobile P2: outline \`${chrome.docspage?.mobile?.P2?.outline}\` + partial nav`, fix: 'Hide TOC below md when sidebar is drawer-only, or fix N4 first.', effort: 'S' },
-  { pri: 'P1', id: 'O3', title: 'Heading permalink anchors not exposed', also: 'F7', verification: `\`headingAnchors: ${docP2.headingAnchors ?? 0}\` on docs.page P2`, fix: 'Enable heading link buttons in prose renderer.', effort: 'S' },
+  { pri: 'P1', id: 'L5', title: 'Visible mobile TOC competes with drawer sidebar', also: 'O7', verification: `Mobile P2: outline \`${chrome.docspage?.mobile?.P2?.outline}\` vs Mintlify \`${chrome.mintlify?.mobile?.P2?.outline}\``, fix: 'Hide in-viewport TOC below md when sidebar is drawer-only.', effort: 'S' },
+  { pri: 'P1', id: 'O3', title: 'Heading permalink anchors not exposed', also: 'F7', verification: `heading permalinks: ${docP2.headingAnchors ?? 0} on docs.page P2`, fix: 'Expose copy-link controls for section headings.', effort: 'S' },
   { pri: 'P1', id: 'A1', title: 'No skip-to-content link', also: 'F8', verification: `\`skipLink: ${dp.P1?.skipLink ?? 0}\` on P1`, fix: 'Add skip link to layout template.', effort: 'S' },
   { pri: 'P1', id: 'D4', title: 'In-docs AI assistant not discoverable', also: 'F22, G4, D6', verification: `\`discoverability.assistant.desktopVisible: false\``, fix: 'Surface agent trigger in header (desktop + mobile).', effort: 'M' },
   { pri: 'P2', id: 'N5', title: 'Missing breadcrumb context on deep pages', also: 'F23', observed: 'Mintlify mobile sub-header shows section path; docs.page shows title only.', fix: 'Breadcrumb component from sidebar hierarchy.', effort: 'M' },

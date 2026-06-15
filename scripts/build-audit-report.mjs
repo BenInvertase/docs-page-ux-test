@@ -13,11 +13,15 @@ const SHOTS_DIR = path.join(ROOT, 'screenshots');
 
 /** Screenshot file + captions for each enhancement-log ID. */
 const ENHANCEMENT_SHOTS = {
-  N4: { file: 'N4-P6-mobile-light-open.png', capM: 'Full doc tree in menu', capD: 'Partial tree (4 links)' },
+  N4: { file: 'N4-P6-mobile-light-open.png', capM: 'Full doc tree in menu', capD: 'Full doc tree in menu' },
   N9: { file: 'P2-tablet-light.png', capM: 'Sidebar in drawer — ~802px main', capD: 'Persistent sidebar — ~530px main' },
-  L5: { file: 'P2-mobile-light.png', capM: 'Single column, no TOC rail', capD: 'TOC rail without full nav' },
-  O3: { file: 'O3-heading-anchors-light.png', capM: 'Permalink icon on heading hover', capD: 'No heading link affordance' },
-  A1: { file: 'A1-skip-link-light.png', capM: 'Skip link visible after Tab', capD: 'No skip link on first Tab stop' },
+  L5: { file: 'P2-mobile-light.png', capM: 'Single column, no TOC rail', capD: 'Single column, no TOC rail' },
+  O3: { file: 'O3-heading-anchors-light.png', capM: 'Permalink icon on heading hover', capD: 'Hover permalink button beside heading' },
+  A1: {
+    file: 'A1-skip-link-light.png',
+    capM: '“Skip to main content” visible after keyboard focus',
+    capD: 'Same tab stop — no skip link (focus moves to search)',
+  },
   D4: { file: 'P1-desktop-light.png', capM: '“Ask Assistant” in header', capD: 'No assistant entry in header' },
   N5: { file: 'N5-P6-mobile-light.png', capM: 'Breadcrumb path on deep page', capD: 'Title only — no breadcrumbs' },
   R1: { file: 'P2-desktop-light.png', capM: 'Wide prose column (~1376px main)', capD: 'Narrower column (~784px main)' },

@@ -8,3 +8,5 @@ node_modules/
 .docs/feature-completeness.md
 .docs/ux-audit-report.html
 screenshots/**/*.png
+playwright-report/
+test-results/
