@@ -1,0 +1,19 @@
+{
+  "$schema": "https://docs.page/schema.json",
+  "name": "Agent Skills",
+  "description": "A standardized way to give AI agents new capabilities and expertise.",
+  "theme": {
+    "preset": "mint"
+  },
+  "sidebar": [
+    {
+      "group": "Documentation",
+      "pages": [
+        {
+          "title": "Overview",
+          "href": "/"
+        }
+      ]
+    }
+  ]
+}
