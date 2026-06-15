@@ -5,8 +5,9 @@
   "scripts": {
     "setup": "node scripts/audit-setup.mjs",
     "audit": "node scripts/run-full-audit.mjs",
+    "scorecards": "node scripts/generate-scorecards.mjs",
     "report": "node scripts/build-audit-report.mjs",
-    "audit:full": "npm run audit && npm run report"
+    "audit:full": "npm run audit && npm run scorecards && npm run report"
   },
   "devDependencies": {
     "playwright": "1.52.0"

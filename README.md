@@ -10,6 +10,7 @@ Agent Skills documentation fixture for comparing **docs.page** vs **Mintlify** r
 | `.docs/ux-audit-rubric.md` | Yes | Scoring methodology (v1.2) |
 | `.docs/example.*` | Yes | Templates showing output file shape |
 | `scripts/run-full-audit.mjs` | Yes | Playwright data collection + screenshots |
+| `scripts/generate-scorecards.mjs` | Yes | Derives scorecards from audit-data.json |
 | `scripts/build-audit-report.mjs` | Yes | Builds standalone HTML report |
 | `.docs/audit-data.json`, scorecards, HTML, `screenshots/*.png` | **No** (gitignored) | Per-run outputs |
 
@@ -22,12 +23,12 @@ npm install
 npx playwright install chromium
 npm run setup          # copies example scorecard templates (once)
 npm run audit          # ~2 min → audit-data.json, feature-completeness.md, screenshots/
-# Edit enhancement-log.md + ux-audit-results.md using audit-data.json and the rubric
+npm run scorecards     # generates ux-audit-results.md + enhancement-log.md from audit data
 npm run report         # → .docs/ux-audit-report.html
 open .docs/ux-audit-report.html
 ```
 
-Or `npm run audit:full` after setup and scorecard edits (audit then report).
+Or `npm run audit:full` after setup (audit → scorecards → report).
 
 ### Comparison URLs
 
